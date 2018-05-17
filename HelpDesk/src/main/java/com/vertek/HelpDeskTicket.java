@@ -1,7 +1,4 @@
 package com.vertek;
-
-import java.util.InputMismatchException;
-
 import java.util.Scanner;
 
 public class HelpDeskTicket {
@@ -22,6 +19,10 @@ public class HelpDeskTicket {
     public void setDescript() {
         System.out.println("Describe your problem: ");
         descript = scan.nextLine();
+        if (descript.length()>15) {
+            String cut = descript.substring(0, 15);
+            descript = cut;
+        }
     }
     public void setApp() {
         System.out.println("Which application?: ");
@@ -30,23 +31,22 @@ public class HelpDeskTicket {
     public void setPriority(){
     	String result;
     	int sentinal=0;
-    	System.out.println("What's the priority? LOW(L), MEDIUM(M), HIGH(H): ");
+    	System.out.println("What's the priority? LOW(l), MEDIUM(m), HIGH(h): ");
         while(sentinal==0){
     	    result= scan.next();
         	switch(result){
-        	case "L": p=priority.LOW;
+        	case "l": p=priority.LOW;
         	     sentinal++;
         	break;
-        	case "M": p=priority.MEDIUM;
-        	 sentinal++;
+        	case "m": p=priority.MEDIUM;
+        	     sentinal++;
         	break;
-        	case "H": p=priority.HIGH;
-        	 sentinal++;
+        	case "h": p=priority.HIGH;
+        	     sentinal++;
         	break;
-        	default: System.out.println("Please Enter L, M, or H: ");
+        	default: System.out.println("Please Enter l, m, or h: ");
         	}
-        }
-      
+        }  
     }
     public int getID() {
         return ID;
@@ -60,14 +60,9 @@ public class HelpDeskTicket {
     public priority getPriority(){
         return p;
     }
-    public String toString() {
-    	
-        return "[TicketID: " + (getID()) //MAKE PRINT METHOD IN IMPL
+    public String toString() {	
+        return "[TicketID: " + (getID())
                 + ", Description: " + getDescript() + ", Application: "+ getApp()+
-                ", Priority: "+getPriority()+"]";
-		    	
+                ", Priority: "+getPriority()+"]";		    	
     }
-    
 }
-
-

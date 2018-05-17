@@ -39,11 +39,4 @@ public class HelpDaoImpl implements HelpDao{
         	int i=BugList.indexOf(bug);
             return BugList.get(i);
         }
-     
-        public void updateTicket(HelpDeskTicket Ticket) 
-        {
-            TicketList.get(Ticket.getID()).setDescript();
-            System.out.println("DeveloperId " + Ticket.getID() 
-            + ", updated in the database");
-        }
     }
