@@ -38,12 +38,11 @@ public class HelpDeskTest{
            }
            runCount++;
            scanner = new Scanner(System.in);
-           System.out.println("S");
+           //System.out.println("SssSSS");
 		   choice = getResponse();
-           System.out.println("SAs");
+           //System.out.println("SAs");
            switch (choice) {
                case "H":  
-            	   			
             	   			HelpDeskTicket h = new HelpDeskTicket(helpID);
             	   			helpDao.addTicket(h);
                             System.out.println("Help Desk Ticket "+(h.getID())+" Created.\n");
@@ -57,23 +56,22 @@ public class HelpDeskTest{
                case "VH":  
             	            System.out.println("Ticket ID You'd Like to View?: ");
                			    String viewID=scanner.next();
+               			 try {
                			    int result = Integer.parseInt(viewID);
                			    HelpDeskTicket toView=null;
-               			    try {
+               			    
                			    	for (HelpDeskTicket Ticket : helpDao.getAllTickets()) {
                			    		if(Ticket.getID()==result) {
                			    			toView=helpDao.getTicket(Ticket);
                			    		}
                			    	}
                			    	if(toView!=null) {
-               					System.out.println("[TicketID: " + (toView.getID()) //MAKE PRINT METHOD IN IMPL
-                                      + ", Description: " + toView.getDescript() + ", Application: "+ toView.getApp()+
-                                      ", Priority: "+toView.getPriority()+"]");
+               			    		System.out.println(toView.toString());
                			    	}
+               			    	else {
+        	  			    		System.out.println("Help Desk Request "+result+ " not found.");
+        	  			    	}
                			   }
-               			   catch(IndexOutOfBoundsException e) {
-	               	     		 System.out.println("Ticket With ID " +result+" Not Found in System.");
-	               	       }
                			   catch(NumberFormatException e) {
         	     			 System.out.println("Entry Invalid.");
         	     		  }
@@ -81,40 +79,34 @@ public class HelpDeskTest{
                case "VB":   
             	    System.out.println("Bug ID You'd Like to View?: ");
       			    String viewBugID=scanner.next();
-      			    int r = Integer.parseInt(viewBugID);
-      			 
-      			    Bug toBug=null;
       			    try {
-      			    	for (Bug bug : helpDao.getAllBugs()) {
-      			    		if(bug.getID()==r) {
-      			    			toBug=helpDao.getBug(bug);
-      			    		}
-      			    	}
-      			    	if(toBug!=null) {
-      			    		System.out.println("[BugID: " + (toBug.getID()) //MAKE PRINT METHOD IN IMPL
-                             + ", Description: " + toBug.getDescript() + ", Application: "+ toBug.getApp()+
-                             ", Priority: "+toBug.getPriority()+", Steps: "+toBug.getSteps()+"]");
-      			    	}
+	      			    int r = Integer.parseInt(viewBugID);
+	      			    Bug toBug=null;
+	  			    	for (Bug bug : helpDao.getAllBugs()) {
+	  			    		if(bug.getID()==r) {
+	  			    			toBug=helpDao.getBug(bug);
+	  			    		}
+	  			    	}
+	  			    	if(toBug!=null) {
+	  			    		System.out.println(toBug.toString());
+	  			    	}
+	  			    	else {
+	  			    		System.out.println("Bug "+r+ " not found.");
+	  			    	}
       			   }
-      			   catch(IndexOutOfBoundsException e) {
-          	     		 System.out.println("Bug With ID " +r+" Not Found in System.");
-          	       }
       			   catch(NumberFormatException e) {
-	     			 System.out.println("Entry Invalid.");
-	     		  }
-            	   
+      				   System.out.println("Entry Invalid.");
+  	     		   }
                    break;
                case "DH": 
             	     	 if(helpDao.getAllTickets().isEmpty()) {
             	     		 System.out.println("No Help Desk Requests Available to Delete.");
             	     	 }
             	     	 else {
-            	     		 //int oldIndex;
             	     		 HelpDeskTicket toDelete = null;
            	     		 	 System.out.println("ID of Ticket to Delete?: ");
 	               	         String d=scanner.next();
 	               	     	 int request = Integer.parseInt(d);
-	               	     	 //HelpDeskTicket toDelete= new HelpDeskTicket;
             	     		 try {
             	     			for (HelpDeskTicket Ticket : helpDao.getAllTickets()) {
             	     			   if(Ticket.getID()==request) {
@@ -142,12 +134,10 @@ public class HelpDeskTest{
         	     		 System.out.println("No Bugs Available to Delete.");
         	     	 }
         	     	 else {
-        	     		 //int oldIndex;
         	     		 Bug toBugDelete = null;
        	     		 	 System.out.println("ID of Bug to Delete?: ");
                	         String d=scanner.next();
                	     	 int request = Integer.parseInt(d);
-               	     	 //HelpDeskTicket toDelete= new HelpDeskTicket;
         	     		 try {
         	     			for (Bug bug : helpDao.getAllBugs()) {
         	     			   if(bug.getID()==request) {
@@ -169,30 +159,22 @@ public class HelpDeskTest{
                    break;
                case "LH": 
             	   for (HelpDeskTicket Ticket : helpDao.getAllTickets()) {
-            		   System.out.println("[TicketID: " + (Ticket.getID()) //MAKE PRINT METHOD IN IMPL
-                               + ", Description: " + Ticket.getDescript() + ", Application: "+ Ticket.getApp()+
-                               ", Priority: "+Ticket.getPriority()+"]");
+            		   System.out.println(Ticket.toString());
                  }
                    break;
                case "LB": 
             	   for (Bug bug : helpDao.getAllBugs()) {
-      					System.out.println("[BugID: " + (bug.getID()) //MAKE PRINT METHOD IN IMPL
-               				    + ", Description: " + bug.getDescript() + ", Application: "+ bug.getApp()+
-               				    ", Steps: "+bug.getSteps()+"]");
+      					System.out.println(bug.toString());
                    }
                    break;
                case "LA":
             	   System.out.println("Help Desk Requests:");
             	   for (HelpDeskTicket Ticket : helpDao.getAllTickets()) {
-            		   System.out.println("[TicketID: " + (Ticket.getID()) //MAKE PRINT METHOD IN IMPL
-                               + ", Description: " + Ticket.getDescript() + ", Application: "+ Ticket.getApp()+
-                               ", Priority: "+Ticket.getPriority()+"]");
+            		   System.out.println(Ticket.toString());
                    }
-               			System.out.println("Bugs:");
-               			for (Bug bug : helpDao.getAllBugs()) {
-          					System.out.println("[BugID: " + (bug.getID()) //MAKE PRINT METHOD IN IMPL
-                   				    + ", Description: " + bug.getDescript() + ", Application: "+ bug.getApp()+
-                   				 ", Priority: "+bug.getPriority()+ ", Steps: "+bug.getSteps()+"]");
+               	   System.out.println("Bugs:");
+               	   for (Bug bug : helpDao.getAllBugs()) {
+          					System.out.println(bug.toString());
                        }		
                    break;
                case "C": 
@@ -209,6 +191,5 @@ public class HelpDeskTest{
            }
        }
        System.out.println("Thank you for using the help desk system!");
-
     }
 }

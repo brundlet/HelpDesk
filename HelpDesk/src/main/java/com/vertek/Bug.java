@@ -22,11 +22,9 @@ public class Bug extends HelpDeskTicket{
             }
             @Override
             public String toString() {
-            	StringBuilder builder = new StringBuilder();
-                builder.append("[ID: " + ID + ", ");
-                builder.append("Description: " + descript + ", ");
-                builder.append("Application: " + app + ", ");
-                builder.append("Steps: "+ steps + "]");
-                return builder.toString();
+            	
+                return "[BugID: " + (getID()) //MAKE PRINT METHOD IN IMPL
+                        + ", Description: " + getDescript() + ", Application: "+ getApp()+
+                        ", Priority: "+getPriority()+", Steps: "+getSteps()+"]";
             }
     }

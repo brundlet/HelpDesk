@@ -61,11 +61,11 @@ public class HelpDeskTicket {
         return p;
     }
     public String toString() {
-    	StringBuilder builder = new StringBuilder();
-        builder.append("[ID: " + this.getID() + ", ");
-        builder.append("Description: " + this.getDescript() + ", ");
-        builder.append("Application: " + this.getApp() + "]");
-        return builder.toString();
+    	
+        return "[TicketID: " + (getID()) //MAKE PRINT METHOD IN IMPL
+                + ", Description: " + getDescript() + ", Application: "+ getApp()+
+                ", Priority: "+getPriority()+"]";
+		    	
     }
     
 }
